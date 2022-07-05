@@ -1,0 +1,58 @@
+{% extends "index.html" %}
+
+
+
+{% block section%}
+<section class="section2">
+ 
+    <div class="table">
+         {% if  row%}
+
+            <div class="title_watch">
+                 <h3>Your Watchlist</h3>
+                 <p>here you can add your favorite shows</p>
+            </div>
+        {%endif%}
+        
+        <table>
+            {% if not row%}
+                    <tr>
+                        <h2>no element yet here</h2>
+                    </tr>
+            {%else%} 
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>title</th>
+                    <th>imdb rating</th>
+                    
+                  </tr>
+               
+            </thead>
+            <tbody>
+                   
+                    {%for row in row%}
+                        <tr>
+                            <td class="poster"><img src="static/{{row[3]}}" style="width: 50px;"></td>
+                            <td>{{row[1]}}</td>
+                            <td><span class="star">&#9733</span> {{row[2]}}</td>
+                            <td>
+                                <form action="/Watchlist" method="post">
+                                    <input type="hidden" name="name" value={{row[0]}}>
+                                    <input type="submit" class="out" value="remove"> 
+
+                                </form>
+                            </td>
+                        </tr>
+                    {%endfor%}
+                {%endif%}
+
+            </tbody>
+           
+          </table>
+
+    </div>
+
+</section>
+
+{% endblock %}
